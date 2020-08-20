@@ -1,0 +1,36 @@
+version: 2.1
+workflows:
+  test-workflow:
+    jobs:
+      - build:
+          context: EdgePetrolApp
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn install --pure-lockfile --non-interactive
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: lint
+          command: yarn lint
+      # - run:
+      #     name: test
+      #     command: yarn run test
+      # - store_artifacts:
+      #     path: test/coverage/coverage-final.json
+      #     prefix: tests
+      # - store_artifacts:
+      #     path: test/coverage
+      #     prefix: coverage
+      # - store_test_results:
+      #     path: test/coverage/coverage-final.json
+      # - run:
+      #     name: Danger
+      #     command: yarn danger ci
