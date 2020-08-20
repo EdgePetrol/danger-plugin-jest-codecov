@@ -1,0 +1,31 @@
+# danger-plugin-jest-codecov
+
+[![Build Status](https://travis-ci.org/guiferrpereira/danger-plugin-jest-codecov.svg?branch=master)](https://travis-ci.org/guiferrpereira/danger-plugin-jest-codecov)
+[![npm version](https://badge.fury.io/js/danger-plugin-jest-codecov.svg)](https://badge.fury.io/js/danger-plugin-jest-codecov)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+> Similar to codecov bot, it will print the code coverage difference on each PR
+
+## Usage
+
+Install:
+
+```sh
+yarn add danger-plugin-jest-codecov --dev
+```
+
+At a glance:
+
+```js
+// dangerfile.js
+import jestCodecov from 'danger-plugin-jest-codecov'
+
+jestCodecov()
+```
+## Changelog
+
+See the GitHub [release history](https://github.com/guiferrpereira/danger-plugin-jest-codecov/releases).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -1,0 +1,11 @@
+{
+  "generator-danger-plugin": {
+    "promptValues": {
+      "authorName": "Guilherme Pereira",
+      "authorEmail": "guiferrpereira@gmail.com",
+      "githubUsername": "guiferrpereira",
+      "useYarn": true,
+      "useTypeScript": true
+    }
+  }
+}
