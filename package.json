@@ -21,7 +21,7 @@
   "files": [
     "dist"
   ],
-  "version": "0.0.0-development",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -92,7 +92,6 @@
   },
   "dependencies": {
     "danger": "^10.4.0",
-    "danger-plugin-jest-codecov": "file:./../danger-plugin-jest-codecov",
     "jsdom": "^16.4.0"
   }
 }
