@@ -30,8 +30,6 @@ const getReport = async (url: any) => {
 
     return coverageData
   } catch (error) {
-    // tslint:disable-next-line no-console
-    console.error("Error fetching circleCI artifact url: ", error)
     return undefined
   }
 }

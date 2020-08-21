@@ -22,7 +22,7 @@ describe("jestCodecov()", () => {
       github: { pr: { title: "My Test Title" } },
     }
 
-    jestCodecov("", "")
+    jestCodecov("http://localhost/index.html", "http://localhost/prev_index.html")
 
     expect(global.markdown).toHaveBeenCalledWith("PR Title: My Test Title")
   })
