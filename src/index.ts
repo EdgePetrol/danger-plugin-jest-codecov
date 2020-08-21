@@ -13,14 +13,14 @@ export declare function markdown(message: string): void
 /**
  * Similar to codecov bot, it will print the code coverage difference on each PR
  */
-export default async function jestCodecov(currentUrl: string, masterUrl: string) {
+export default async function jestCodecov(currentUrl: string, previousUrl: string) {
   const currentReport = await getReport(currentUrl)
-  const masterReport = await getReport(masterUrl)
+  const previousReport = await getReport(previousUrl)
 
   const currentCoverage = getCoverage(currentReport)
-  const masterCoverage = getCoverage(masterReport)
+  const previousCoverage = getCoverage(previousReport)
 
-  markdown(outputReport(currentCoverage, masterCoverage))
+  markdown(outputReport(currentCoverage, previousCoverage, getPreviousBranchName(previousUrl)))
 }
 
 const getReport = async (url: string) => {
@@ -69,10 +69,10 @@ const getCoverage = (report: string) => {
 }
 
 // tslint:disable: no-shadowed-variable
-const outputReport = (results: any, masterResults: any) => {
+const outputReport = (results: any, masterResults: any, previousBranchName: string) => {
   let message = ["```diff\n@@            Coverage Diff             @@"]
   message = message.concat([
-    `## ${justifyText("master", 18)} ${justifyText(
+    `## ${justifyText(previousBranchName, 18)} ${justifyText(
       "#" + (process.env.CIRCLE_PULL_REQUEST || "NaN").split("/").pop(),
       8
     )} ${justifyText("+/-", 7)} ${justifyText("##", 3)}`,
@@ -80,11 +80,7 @@ const outputReport = (results: any, masterResults: any) => {
   message = message.concat(separatorLine())
   message = message.concat(
     _.map(results, (lineResult, index) => {
-      let masterValue = "-"
-      if (typeof masterResults[index] === "object") {
-        masterValue = masterResults[index][1]
-      }
-      return newLine(lineResult, masterValue, "%")
+      return newLine(lineResult, masterResults?.[index]?.[1] || "-", "%")
     })
   )
 
@@ -136,4 +132,17 @@ const rjust = (data: string, width: number, padding: string = " ") => {
   padding = padding.substr(0, 1)
 
   return data.length < width ? padding.repeat(width - data.length) + data : data
+}
+
+const getPreviousBranchName = (url: string) => {
+  return (
+    url
+      ?.split("?")
+      ?.pop()
+      ?.split("&")
+      ?.filter(element => element.includes("branch="))
+      ?.pop()
+      ?.split("=")
+      ?.pop() || "master"
+  )
 }
