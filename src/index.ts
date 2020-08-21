@@ -4,8 +4,6 @@ import * as _ from "lodash"
 import fetch from "node-fetch"
 import { DangerDSLType } from "../node_modules/danger/distribution/dsl/DangerDSL"
 
-// const fetch = require("node-fetch")
-
 declare var danger: DangerDSLType
 export declare function message(message: string): void
 export declare function warn(message: string): void
