@@ -13,7 +13,7 @@ export declare function markdown(message: string): void
 /**
  * Similar to codecov bot, it will print the code coverage difference on each PR
  */
-export default async function jestCodecov(currentUrl: string, previousUrl: string) {
+export async function jestCodecov(currentUrl: string, previousUrl: string) {
   const currentReport = await getReport(currentUrl)
   const previousReport = await getReport(previousUrl)
 
@@ -23,32 +23,9 @@ export default async function jestCodecov(currentUrl: string, previousUrl: strin
   markdown(outputReport(currentCoverage, previousCoverage, getPreviousBranchName(previousUrl)))
 }
 
-const getReport = async (url: string) => {
-  let coverageUrl
-
+const getReport = async (url: any) => {
   try {
-    const response = await fetch(url)
-    const data = await response.json()
-
-    coverageUrl = _.find(data, artifact => {
-      if (!artifact.hasOwnProperty("url")) {
-        return undefined
-      }
-
-      return artifact.url.endsWith("lcov-report/index.html")
-    })
-  } catch (error) {
-    // tslint:disable-next-line no-console
-    console.error("Error fetching circleCI url: ", error)
-    return undefined
-  }
-
-  if (coverageUrl === undefined) {
-    return undefined
-  }
-
-  try {
-    const coverageResponse = await fetch(`${coverageUrl.url}?circle-token=${process.env.CIRCLE_TOKEN}`)
+    const coverageResponse = await fetch(url)
     const coverageData = await coverageResponse.text()
 
     return coverageData
@@ -134,7 +111,7 @@ const rjust = (data: string, width: number, padding: string = " ") => {
   return data.length < width ? padding.repeat(width - data.length) + data : data
 }
 
-const getPreviousBranchName = (url: string) => {
+const getPreviousBranchName = (url: any) => {
   return (
     url
       ?.split("?")

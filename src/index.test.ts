@@ -1,4 +1,4 @@
-import jestCodecov from "./index"
+import { jestCodecov } from "./index"
 
 declare const global: any
 

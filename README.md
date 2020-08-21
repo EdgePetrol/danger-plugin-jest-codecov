@@ -20,7 +20,7 @@ At a glance:
 // dangerfile.js
 import jestCodecov from 'danger-plugin-jest-codecov'
 
-jestCodecov()
+jestCodecov('current_url_to_lcov_index_html', 'desired_branch_url_to_lcov_index_html')
 ```
 ## Changelog
 
