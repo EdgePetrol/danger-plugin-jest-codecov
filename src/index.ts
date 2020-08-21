@@ -1,5 +1,11 @@
 // Provides dev-time type structures for  `danger` - doesn't affect runtime.
+import { JSDOM } from "jsdom"
+import * as _ from "lodash"
+import fetch from "node-fetch"
 import { DangerDSLType } from "../node_modules/danger/distribution/dsl/DangerDSL"
+
+// const fetch = require("node-fetch")
+
 declare var danger: DangerDSLType
 export declare function message(message: string): void
 export declare function warn(message: string): void
@@ -9,9 +15,10 @@ export declare function markdown(message: string): void
 /**
  * Similar to codecov bot, it will print the code coverage difference on each PR
  */
-export const jestCodecov = async (currentUrl, masterUrl, showWarning = false) => {
+export default async function jestCodecov(currentUrl: string, masterUrl: string) {
   const currentReport = await getReport(currentUrl)
   const masterReport = await getReport(masterUrl)
+
   const currentCoverage = getCoverage(currentReport)
   const masterCoverage = getCoverage(masterReport)
 
@@ -55,8 +62,8 @@ const getReport = async url => {
 }
 
 const getCoverage = report => {
-  const dom = new jsdom.JSDOM(report)
-  const data = dom.window.document.getElementsByClassName("fl pad1y space-right2")
+  const { window } = new JSDOM(report)
+  const data = window.document.getElementsByClassName("fl pad1y space-right2")
 
   return _.map(data, node => {
     return [node.children[1].textContent, node.children[0].textContent, node.children[2].textContent]
@@ -82,6 +89,7 @@ const outputReport = (results, masterResults) => {
       return newLine(lineResult, masterValue, "%")
     })
   )
+
   message = message.concat(separatorLine())
   message = message.concat(["```"])
 

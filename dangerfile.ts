@@ -1,0 +1,3 @@
+import jestCodecov from "./"
+
+// jestCodecov("")

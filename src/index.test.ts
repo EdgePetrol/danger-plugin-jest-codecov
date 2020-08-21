@@ -22,7 +22,12 @@ describe("jestCodecov()", () => {
       github: { pr: { title: "My Test Title" } },
     }
 
-    jestCodecov()
+    jestCodecov(
+      "https://circleci.com/api/v1.1/project/github/EdgePetrol/scraper-adaptors-v2/281/artifacts?circle-token=" +
+        process.env.CIRCLE_TOKEN,
+      "https://circleci.com/api/v1.1/project/github/EdgePetrol/scraper-adaptors-v2/163/artifacts?circle-token=" +
+        process.env.CIRCLE_TOKEN
+    )
 
     expect(global.message).toHaveBeenCalledWith("PR Title: My Test Title")
   })
