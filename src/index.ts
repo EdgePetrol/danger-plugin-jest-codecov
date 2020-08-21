@@ -23,7 +23,7 @@ export default async function jestCodecov(currentUrl: string, masterUrl: string)
   markdown(outputReport(currentCoverage, masterCoverage))
 }
 
-const getReport = async url => {
+const getReport = async (url: string) => {
   let coverageUrl
 
   try {
@@ -59,7 +59,7 @@ const getReport = async url => {
   }
 }
 
-const getCoverage = report => {
+const getCoverage = (report: string) => {
   const { window } = new JSDOM(report)
   const data = window.document.getElementsByClassName("fl pad1y space-right2")
 
@@ -69,7 +69,7 @@ const getCoverage = report => {
 }
 
 // tslint:disable: no-shadowed-variable
-const outputReport = (results, masterResults) => {
+const outputReport = (results: any, masterResults: any) => {
   let message = ["```diff\n@@            Coverage Diff             @@"]
   message = message.concat([
     `## ${justifyText("master", 18)} ${justifyText(
@@ -98,7 +98,7 @@ const separatorLine = () => {
   return ["=========================================="]
 }
 
-const newLine = (lineData, masterLineData, symbol) => {
+const newLine = (lineData: any, masterLineData: string, symbol: string) => {
   const [prep, diff] = getPrependDiff(masterLineData, lineData[1], symbol)
 
   return `${prep} ${justifyText(lineData[0], 11, "left")} ${justifyText(masterLineData, 8)}${justifyText(
@@ -107,7 +107,7 @@ const newLine = (lineData, masterLineData, symbol) => {
   )} ${justifyText(diff, 5)}`
 }
 
-const getPrependDiff = (oldValue, newValue, symbol) => {
+const getPrependDiff = (oldValue: string, newValue: string, symbol: string) => {
   let prep = " "
   let value = (parseFloat(newValue) - parseFloat(oldValue)).toFixed(2).toString()
 
@@ -122,17 +122,17 @@ const getPrependDiff = (oldValue, newValue, symbol) => {
   return [prep, value]
 }
 
-const justifyText = (data, adjust, position = "right") => {
+const justifyText = (data: string, adjust: number, position: string = "right") => {
   return position === "right" ? rjust(data, adjust) : ljust(data, adjust)
 }
 
-const ljust = (data, width, padding = " ") => {
+const ljust = (data: string, width: number, padding: string = " ") => {
   padding = padding.substr(0, 1)
 
   return data.length < width ? data + padding.repeat(width - data.length) : data
 }
 
-const rjust = (data, width, padding = " ") => {
+const rjust = (data: string, width: number, padding: string = " ") => {
   padding = padding.substr(0, 1)
 
   return data.length < width ? padding.repeat(width - data.length) + data : data
