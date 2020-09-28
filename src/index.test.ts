@@ -2,7 +2,7 @@ import { jestCodecov } from "./index"
 
 declare const global: any
 
-describe("jestCodecov()", () => {
+describe("#jestCodecov()", () => {
   beforeEach(() => {
     global.warn = jest.fn()
     global.message = jest.fn()
@@ -17,13 +17,7 @@ describe("jestCodecov()", () => {
     global.markdown = undefined
   })
 
-  it("Checks for a that message has been called", () => {
-    global.danger = {
-      github: { pr: { title: "My Test Title" } },
-    }
-
-    jestCodecov("http://localhost/index.html", "http://localhost/prev_index.html")
-
-    expect(global.markdown).toHaveBeenCalledWith("PR Title: My Test Title")
+  it("returns undefined without no circle ci envs", async () => {
+    expect(await jestCodecov("http://localhost/index.html", "http://localhost/prev_index.html")).toBe(undefined)
   })
 })

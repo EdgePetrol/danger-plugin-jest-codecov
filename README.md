@@ -1,8 +1,8 @@
-# danger-plugin-jest-codecov
-
-[![Build Status](https://circleci.com/gh/EdgePetrol/danger-plugin-jest-codecov.svg?style=shield)](https://app.circleci.com/pipelines/github/EdgePetrol/danger-plugin-jest-codecov)
+[![EdgePetrol](https://circleci.com/gh/EdgePetrol/danger-plugin-jest-codecov.svg?style=shield)](https://app.circleci.com/pipelines/github/EdgePetrol/danger-plugin-jest-codecov)
+![EdgePetrol](https://github.com/EdgePetrol/coverage/blob/master/danger-plugin-jest-codecov/master/badge.svg)
 [![npm version](https://badge.fury.io/js/danger-plugin-jest-codecov.svg)](https://badge.fury.io/js/danger-plugin-jest-codecov)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+# danger-plugin-jest-codecov
 
 > Similar to codecov bot, it will print the code coverage difference on each PR
 
