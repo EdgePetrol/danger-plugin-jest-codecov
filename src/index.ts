@@ -23,7 +23,7 @@ export async function jestCodecov(currentUrl: string, previousUrl: string) {
   markdown(outputReport(currentCoverage, previousCoverage, getPreviousBranchName(previousUrl)))
 }
 
-const getReport = async (url: any) => {
+const getReport = async (url: string) => {
   try {
     const coverageResponse = await fetch(url)
     const coverageData = await coverageResponse.text()
@@ -34,7 +34,7 @@ const getReport = async (url: any) => {
   }
 }
 
-const getCoverage = (report: string) => {
+const getCoverage = (report: string|undefined) => {
   const { window } = new JSDOM(report)
   const data = window.document.getElementsByClassName("fl pad1y space-right2")
 
