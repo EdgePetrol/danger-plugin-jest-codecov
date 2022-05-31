@@ -24,7 +24,7 @@ jestCodecov('current_url_to_lcov_index_html', 'desired_branch_url_to_lcov_index_
 ```
 ## Changelog
 
-See the GitHub [release history](https://github.com/guiferrpereira/danger-plugin-jest-codecov/releases).
+See the GitHub [release history](https://github.com/EdgePetrol/danger-plugin-jest-codecov/releases).
 
 ## Contributing
 
